@@ -74,6 +74,7 @@ void login() {
             cout <<"Enter your password: ";
             std::cin >> enteredpassword;
             if(enteredpassword == password){
+                relogin:
                 int choice = -1;
                 do{
                 banner();
@@ -83,14 +84,22 @@ void login() {
                 cout << "3. Transfer money " <<endl;
                 cout << "4. exit " <<endl;
                 cout << "Please enter your choice : ";
-                string choice;
                 std::cin >> choice;
                 }
                 while(choice<=0 || choice>=5);
                 switch (choice)
                 {
                 case 1:
-                    cout << "Your balance is : "<<balance;
+                    cout << "Your balance is : " << balance<<endl;
+                    cout <<"Do you want to exit?(y/n) : ";
+                    char userExit;
+                    std::cin >> userExit;
+                    if(userExit == 'y'||userExit == 'Y'){
+                        exit();
+                    }
+                    else{
+                        goto relogin;
+                    }
                     break;
                 
                 case 2:
@@ -106,6 +115,7 @@ void login() {
                         currentBalance -= amount;
                         cout << "Balance: " << currentBalance;
                     }
+                    break;
                 }
         }
             else{
@@ -119,7 +129,7 @@ void login() {
     else{
         cout << "Provided phone number is not registered." << endl;
     }
-     cout << "do you want to retry?(y/n): ";
+    cout << "do you want to retry?(y/n): ";
     char choice;
     std::cin >> choice;
     if(choice == 'y'||choice == 'Y'){
